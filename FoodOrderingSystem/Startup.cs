@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FoodOrderingSystem
@@ -23,7 +26,16 @@ namespace FoodOrderingSystem
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
+            services.AddSwaggerGen(myswag =>
+
+            {
+            myswag.SwaggerDoc("V1", new OpenApiInfo
+             {
+                    Title="MyProject",
+                    Version="V1"
+             });
+        {
+            services.AddControllersWithViews();
      //       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
      //.AddJwtBearer(options =>
      //{
@@ -55,12 +67,12 @@ namespace FoodOrderingSystem
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-    app.UseSwagger();
-    app.UseSwaggerUI(myswag => {
-        myswag.SwaggerEndpoint("/swagger/V1/swagger.json", "My Swagger Api");
-    });
+            app.UseSwagger();
+            app.UseSwaggerUI(myswag => {
+                myswag.SwaggerEndpoint("/swagger/V1/swagger.json", "Food Ordering Api");
+            });
 
-    app.UseRouting();
+            app.UseRouting();
 
             app.UseAuthorization();
 
