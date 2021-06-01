@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,34 +24,35 @@ namespace FoodOrderingSystem
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
+      {
             services.AddSwaggerGen(myswag =>
 
-            {
-            myswag.SwaggerDoc("V1", new OpenApiInfo
+                {
+                    myswag.SwaggerDoc("V1", new OpenApiInfo
+                    {
+                        Title = "MyProject",
+                        Version = "V1"
+                    });
+                });
+                    services.AddControllersWithViews();
+                    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+             .AddJwtBearer(options =>
              {
-                    Title="MyProject",
-                    Version="V1"
+                 options.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidateLifetime = false,
+                     ValidateIssuerSigningKey = true,
+                     ValidIssuer = Configuration["Jwt:Issuer"],
+                     ValidAudience = Configuration["Jwt:Issuer"],
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                 };
              });
-        {
-            services.AddControllersWithViews();
-     //       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-     //.AddJwtBearer(options =>
-     //{
-     //    options.TokenValidationParameters = new TokenValidationParameters
-     //    {
-     //        ValidateIssuer = true,
-     //        ValidateAudience = true,
-     //        ValidateLifetime = false,
-     //        ValidateIssuerSigningKey = true,
-     //        ValidIssuer = Configuration["Jwt:Issuer"],
-     //        ValidAudience = Configuration["Jwt:Issuer"],
-     //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-     //    };
-     //});
-        }
+                }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
