@@ -27,59 +27,57 @@ namespace FoodOrderingSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         { 
-        //      services.AddControllersWithViews();
-        //  {
-        //        services.AddSwaggerGen(myswag =>
+             services.AddControllersWithViews();
+            // Swagger Implementation
+            services.AddSwaggerGen(myswag =>
+            {
+                myswag.SwaggerDoc("V1", new OpenApiInfo
+                {
+                    Title = "Food Ordering System",
+                    Version = "V1"
+                });
+                // Authorization
+                //myswag.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                //{
+                //    In = ParameterLocation.Header,
+                //    Description = "Please insert JWT with Bearer into field",
+                //    Name = "Authorization",
+                //    Type = SecuritySchemeType.ApiKey
+                //});
+                //myswag.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                //    {
+                //        new OpenApiSecurityScheme
+                //        {
+                //             Reference = new OpenApiReference
+                //             {
+                //                 Type = ReferenceType.SecurityScheme,
+                //                 Id = "Bearer"
+                //             }
+                //        },
+                //        new string[] { }
+                //    }
+                //});
+            });
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = false,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
 
-        //    {
-        //            myswag.SwaggerDoc("V1", new OpenApiInfo
-        //            {
-        //                Title = "MyProject",
-        //                Version = "V1"
-        //            });
-        //            myswag.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-        //            {
-        //                Description = "JWT Authorization",
-        //                Name = "Authorization",
-        //                In = ParameterLocation.Header,
-        //                Type = SecuritySchemeType.ApiKey,
-        //                Scheme = "Bearer"
-        //            });
-        //            myswag.AddSecurityRequirement(new OpenApiSecurityRequirement
-        //        {
-        //            {
-        //                new OpenApiSecurityScheme
-        //                {
-        //                    Reference = new OpenApiReference
-        //                    {
-        //                        Type = ReferenceType.SecurityScheme,
-        //                        Id = "Bearer"
-        //                    }
-        //                },
-        //                new string[] { }
-        //            }
-        //        });
-        //    });
-        //});
-                  
-             //       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-             //.AddJwtBearer(options =>
-             //{
-             //    options.TokenValidationParameters = new TokenValidationParameters
-             //    {
-             //        ValidateIssuer = true,
-             //        ValidateAudience = true,
-             //        ValidateLifetime = false,
-             //        ValidateIssuerSigningKey = true,
-             //        ValidIssuer = Configuration["Jwt:Issuer"],
-             //        ValidAudience = Configuration["Jwt:Issuer"],
-             //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-             //    };
-             //});
-          }
+
+                    };
+                });
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -93,12 +91,12 @@ namespace FoodOrderingSystem
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-    app.UseSwagger();
-    app.UseSwaggerUI(myswag => {
-        myswag.SwaggerEndpoint("/swagger/V1/swagger.json", "My Swagger Api");
-    });
+            app.UseSwagger();
+            app.UseSwaggerUI(myswag => {
+                myswag.SwaggerEndpoint("/swagger/V1/swagger.json", "Food Ordering Api");
+            });
 
-    app.UseRouting();
+            app.UseRouting();
 
             app.UseAuthorization();
 
