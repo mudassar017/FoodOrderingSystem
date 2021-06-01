@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,6 +23,14 @@ namespace FoodOrderingSystem
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
+            services.AddSwaggerGen(myswag =>
+
+            {
+            myswag.SwaggerDoc("V1", new OpenApiInfo
+             {
+                    Title="MyProject",
+                    Version="V1"
+             });
         {
             services.AddControllersWithViews();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -55,8 +64,12 @@ namespace FoodOrderingSystem
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+    app.UseSwagger();
+    app.UseSwaggerUI(myswag => {
+        myswag.SwaggerEndpoint("/swagger/V1/swagger.json", "My Swagger Api");
+    });
 
-            app.UseRouting();
+    app.UseRouting();
 
             app.UseAuthorization();
 
