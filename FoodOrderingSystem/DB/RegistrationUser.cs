@@ -19,5 +19,10 @@ namespace FoodOrderingSystem.DB
         public DateTime InsertedDateTime { get; set; }
         public string Password { get; set; }
         public int status { get; set; }
+
+        internal void EncryptDecrypt()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
