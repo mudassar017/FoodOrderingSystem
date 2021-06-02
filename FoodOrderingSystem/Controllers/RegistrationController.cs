@@ -1,6 +1,8 @@
-﻿using FoodOrderingSystem.Context;
+﻿using AutoMapper;
+using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
 using FoodOrderingSystem.EncryptionDecryptionClass;
+using FoodOrderingSystem.View_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,25 +19,29 @@ namespace FoodOrderingSystem.Controllers
     {
         IConfiguration _config;
         ProjectContext _Project;
-        public RegistrationController(IConfiguration config, ProjectContext project)
+        IMapper _map;
+        public RegistrationController(IConfiguration config, ProjectContext project, IMapper map)
         {
             _config = config;
             _Project = project;
+            _map = map;
 
         }
         [HttpPost]
 
         [Route("Registration")]
-        public Response Registration(RegistrationUser obj)
+        public Response Registration(InsertionModel obj)
         {
             Response res = new Response();
+
             try
             {
-                RegistrationUser newRegistrationUser = new RegistrationUser();
+                RegistrationUser newUser = _map.Map<RegistrationUser>(obj);
 
-                newRegistrationUser.status = 1;
+
+                newUser.status = 1;
              //   EncryptDecrypt.Base64Encode(newRegistrationUser.Password);
-                _Project.Registrations.Add(newRegistrationUser);
+                _Project.Registrations.Add(newUser);
                 _Project.SaveChanges();
                 res.status = "Insertion successfull";
 
@@ -50,10 +56,11 @@ namespace FoodOrderingSystem.Controllers
 
         [HttpGet]
         [Route("GetRegistration")]
-        public List<RegistrationUser> GetRegistration()
+        public List<GetModel> GetRegistration()
         {
             List<RegistrationUser> RegistrationList = _Project.Registrations.Where(std => std.status == 1).ToList();
-            return RegistrationList;
+            List<GetModel> NewList = _map.Map<List<GetModel>>(RegistrationList);
+            return NewList;
         }
     }
 }

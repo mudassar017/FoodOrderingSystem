@@ -32,6 +32,7 @@ namespace FoodOrderingSystem
         {
             services.AddControllersWithViews();
             services.AddMvc();
+            services.AddAutoMapper(typeof(Startup));
             services.AddDbContext<ProjectContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Project")));
             // Swagger Implementation
             services.AddSwaggerGen(myswag =>
