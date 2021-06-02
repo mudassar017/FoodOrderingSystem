@@ -8,5 +8,7 @@ namespace FoodOrderingSystem.DB
     public class Response
     {
         public string status { get; set; }
+        public string Token { get; set; }
+        public string Id { get; set; }
     }
 }
