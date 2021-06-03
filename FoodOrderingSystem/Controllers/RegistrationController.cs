@@ -2,7 +2,9 @@
 using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
 using FoodOrderingSystem.EncryptionDecryptionClass;
+using FoodOrderingSystem.Models;
 using FoodOrderingSystem.View_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,8 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.Controllers
 {
+
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistrationController : ControllerBase
@@ -27,10 +31,11 @@ namespace FoodOrderingSystem.Controllers
             _map = map;
 
         }
+        [AllowAnonymous]
         [HttpPost]
 
-        [Route("Registration")]
-        public Response Registration(InsertionModel obj)
+        [Route("RegistrationUser")]
+        public Response RegistrationUser(UserRegistrationModel obj)
         {
             Response res = new Response();
 
@@ -40,7 +45,7 @@ namespace FoodOrderingSystem.Controllers
 
 
                 newUser.status = 1;
-             //   EncryptDecrypt.Base64Encode(newRegistrationUser.Password);
+                newUser.Password = EncryptDecrypt.Encrypt(newUser.Password);
                 _Project.Registrations.Add(newUser);
                 _Project.SaveChanges();
                 res.status = "Insertion successfull";
@@ -56,8 +61,9 @@ namespace FoodOrderingSystem.Controllers
 
         [HttpGet]
         [Route("GetRegistration")]
-        public List<GetModel> GetRegistration()
+        public async Task< List<GetModel>> GetRegistration()
         {
+            await Task.Delay(0);  
             List<RegistrationUser> RegistrationList = _Project.Registrations.Where(std => std.status == 1).ToList();
             List<GetModel> NewList = _map.Map<List<GetModel>>(RegistrationList);
             return NewList;

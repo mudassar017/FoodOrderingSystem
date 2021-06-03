@@ -20,9 +20,6 @@ namespace FoodOrderingSystem.DB
         public string Password { get; set; }
         public int status { get; set; }
 
-        internal void EncryptDecrypt()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

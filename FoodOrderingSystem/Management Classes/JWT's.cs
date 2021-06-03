@@ -22,11 +22,11 @@ namespace FoodOrderingSystem.Management_Classes
             //new Claim(JwtRegisteredClaimNames.Sub, userInfo.Username) };
 
             var claims = new[] {
-             new Claim("RegistrationId", userInfo.RegistrationId.ToString()),
-             new Claim("Name", userInfo.Name.ToString()),
-              new Claim("Email", userInfo.Email.ToString()),
-              new Claim("Email", userInfo.Password.ToString())
-
+             
+                 new Claim("Name", userInfo.Name.ToString()),
+                 new Claim("Email", userInfo.Email.ToString()),
+                 new Claim("PhoneNumber", userInfo.PhoneNumber.ToString()),
+                 new Claim("Address", userInfo.Address.ToString()),
             };
 
 

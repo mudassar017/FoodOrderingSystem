@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.View_Model
 {
-    public class InsertionModel
+    public class UserRegistrationModel
     {
         
         public string Name { get; set; }

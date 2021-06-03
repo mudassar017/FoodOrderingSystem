@@ -32,7 +32,9 @@ namespace FoodOrderingSystem
         {
             services.AddControllersWithViews();
             services.AddMvc();
+            // USe of AutoMapper
             services.AddAutoMapper(typeof(Startup));
+            //Project Context
             services.AddDbContext<ProjectContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Project")));
             // Swagger Implementation
             services.AddSwaggerGen(myswag =>
@@ -42,31 +44,32 @@ namespace FoodOrderingSystem
                     Title = "Food Ordering System",
                     Version = "V1"
                 });
-                // Authorization
-                //myswag.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                //{
-                //    In = ParameterLocation.Header,
-                //    Description = "Please insert JWT with Bearer into field",
-                //    Name = "Authorization",
-                //    Type = SecuritySchemeType.ApiKey
-                //});
-                //myswag.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                //    {
-                //        new OpenApiSecurityScheme
-                //        {
-                //             Reference = new OpenApiReference
-                //             {
-                //                 Type = ReferenceType.SecurityScheme,
-                //                 Id = "Bearer"
-                //             }
-                //        },
-                //        new string[] { }
-                //    }
-                //});
+                // JWT Authorization
+                myswag.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                myswag.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                             Reference = new OpenApiReference
+                             {
+                                 Type = ReferenceType.SecurityScheme,
+                                 Id = "Bearer"
+                             }
+                        },
+                        new string[] { }
+                    }
+                });
             });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
+
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -104,7 +107,7 @@ namespace FoodOrderingSystem
             });
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

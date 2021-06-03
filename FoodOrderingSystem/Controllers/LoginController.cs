@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
+using FoodOrderingSystem.EncryptionDecryptionClass;
 using FoodOrderingSystem.Management_Classes;
+using FoodOrderingSystem.Models;
 using FoodOrderingSystem.View_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
@@ -32,21 +35,23 @@ namespace FoodOrderingSystem.Controllers
           public Response LoginStudent(LoginModel lgn)
           {
               Response res = new Response();
-        RegistrationUser Data = _Project.Registrations.Where(Data => lgn.Email.Equals(Data.Email) && lgn.Password.Equals(Data.Password)).FirstOrDefault();
+
+              
 
               try
               {
-                  
-                  if (Data == default(RegistrationUser))
-                  {
-                      res.Token = "Invalid  UserName/Password";
-                  }
-                  else
-                  {
-                      res.Token = JWT_s.GenerateJSONWebToken(Data, _config);
+                RegistrationUser userMatch = _map.Map<RegistrationUser>(lgn);
+                RegistrationUser userData = _Project.Registrations.Where(userData => userData.Email.Equals(lgn.Email) && userData.Password.Equals(EncryptDecrypt.Encrypt(lgn.Password))).FirstOrDefault();
 
-
-                  }
+                if (userData == default(RegistrationUser))
+                {
+                    res.status = "Invalid UserName/Password";
+                }
+                else
+                {
+                    res.status = "Login Successfull";
+                    res.Token = JWT_s.GenerateJSONWebToken(userData, _config);
+                }
               }
               catch
               {

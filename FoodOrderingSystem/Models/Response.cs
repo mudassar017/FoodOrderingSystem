@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FoodOrderingSystem.DB
+namespace FoodOrderingSystem.Models
 {
     public class Response
     {
