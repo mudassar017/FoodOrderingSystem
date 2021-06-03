@@ -2,6 +2,7 @@
 using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
 using FoodOrderingSystem.Management_Classes;
+using FoodOrderingSystem.View_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,32 +27,35 @@ namespace FoodOrderingSystem.Controllers
             _map = map;
 
         }
-        [HttpPost]
-        [Route("LoginStudent")]
-        public Response LoginStudent(RegistrationUser lgn)
-        {
-            Response res = new Response();
-            try
-            {
-                RegistrationUser std= _Project.Registrations.Where(std => std.Email.Equals(lgn.Email) && std.Password.Equals(lgn.Password)).FirstOrDefault();
-                if (std == default(RegistrationUser))
-                {
-                    res.Token = "Invalid  UserName/Password";
-                }
-                else
-                {
-                    res.Token = JWT_s.GenerateJSONWebToken(std, _config);
-                    
+          [HttpPost]
+          [Route("LoginStudent")]
+          public Response LoginStudent(LoginModel lgn)
+          {
+              Response res = new Response();
+        RegistrationUser Data = _Project.Registrations.Where(Data => lgn.Email.Equals(Data.Email) && lgn.Password.Equals(Data.Password)).FirstOrDefault();
 
-                }
-            }
-            catch
-            {
-                res.status = "Failed";
-            }
-            return res;
-        }
+              try
+              {
+                  
+                  if (Data == default(RegistrationUser))
+                  {
+                      res.Token = "Invalid  UserName/Password";
+                  }
+                  else
+                  {
+                      res.Token = JWT_s.GenerateJSONWebToken(Data, _config);
 
 
+                  }
+              }
+              catch
+              {
+                  res.status = "Failed";
+              }
+              return res;
+          }
+
+          
     }
+   
 }
