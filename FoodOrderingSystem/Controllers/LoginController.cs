@@ -2,6 +2,7 @@
 using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
 using FoodOrderingSystem.Management_Classes;
+using FoodOrderingSystem.View_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -28,12 +29,13 @@ namespace FoodOrderingSystem.Controllers
         }
         [HttpPost]
         [Route("LoginStudent")]
-        public Response LoginStudent(RegistrationUser lgn)
+        public Response LoginStudent(LoginModel lgn)
         {
             Response res = new Response();
+            RegistrationUser std = _Project.Registrations.Where(std => lgn.Email.Equals(std.Email) && lgn.Password.Equals(std.Password)).FirstOrDefault();
             try
             {
-                RegistrationUser std= _Project.Registrations.Where(std => std.Email.Equals(lgn.Email) && std.Password.Equals(lgn.Password)).FirstOrDefault();
+                
                 if (std == default(RegistrationUser))
                 {
                     res.Token = "Invalid  UserName/Password";
