@@ -38,12 +38,12 @@ namespace FoodOrderingSystem.Controllers
                 
                 if (std == default(RegistrationUser))
                 {
-                    res.Token = "Invalid  UserName/Password";
+                    res.status = "Invalid  UserName/Password";
                 }
                 else
                 {
                     res.Token = JWT_s.GenerateJSONWebToken(std, _config);
-                    
+                    res.status = "Login Successfuly";
 
                 }
             }

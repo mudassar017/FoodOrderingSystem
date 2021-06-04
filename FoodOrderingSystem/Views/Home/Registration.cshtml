@@ -1,0 +1,88 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<style type="text/css">
+    <!--
+    .style1 {
+        font-size: 36px;
+        font-weight: bold;
+    }
+
+    .style2 {
+        font-size: 36px;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+    -->
+</style>
+<table width="60%" border="0" align="center">
+    <tr>
+        <td colspan="3" bgcolor="#0099FF"><span class="style1">Login User </span></td>
+    </tr>
+    <tr>
+        <td width="21%">&nbsp;</td>
+        <td width="26%">&nbsp;</td>
+        <td width="53%">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>Email:</td>
+        <td><input type="email" id="Email" class="form-control"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>Password:</td>
+        <td><input type="password" id="Password" class="form-control"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td><label id="lblMessage"></label></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+
+        <td>&nbsp;</td>
+        <td><button id="btnSubmit" class="btn btn-success">Submit</button></td>
+    </tr>
+</table>
+<br />
+
+</table>
+
+<script>
+    $(document).ready(function () {
+        
+        $('#btnSubmit').click(function () {
+            var Email = $('#Email').val();
+            var Password = $('#Password').val();
+            var MyJson = { "email": Email, "password": Password };
+            $.ajax({
+                type: "POST",
+                url: "/api/Login/LoginStudent",
+                data: JSON.stringify(MyJson),
+                contentType: "application/json;",
+                dataType: "JSON",
+                success: function (response) {
+                    if (response.status == "Login Successfuly") {
+                        $('#Email').val('');
+                        $('#Password').val('');
+                        $('#Email').focus();
+                        $('#lblMessage').html("Login Successfully");
+                        $('#lblMessage').css('color', 'green');
+                    }
+                    else {
+                        $('#lblMessage').html("Login Failed");
+                        $('#lblMessage').css('color', 'red');
+                    }
+                }
+
+            });
+        });
+
+    });
+</script>
