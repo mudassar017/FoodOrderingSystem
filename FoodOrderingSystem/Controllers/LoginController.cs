@@ -32,31 +32,32 @@ namespace FoodOrderingSystem.Controllers
         }
         [HttpPost]
         [Route("LoginStudent")]
-        public Response LoginStudent(RegistrationUser lgn)
+        public Response LoginStudent(LoginModel lgn)
         {
             Response res = new Response();
             try
             {
-                RegistrationUser std= _Project.Registrations.Where(std => std.Email.Equals(lgn.Email) && std.Password.Equals(lgn.Password)).FirstOrDefault();
-                if (std == default(RegistrationUser))
+                RegistrationUser userMatch = _map.Map<RegistrationUser>(lgn);
+                RegistrationUser userData = _Project.Registrations.Where(userData => userData.Email.Equals(lgn.Email) && userData.Password.Equals(EncryptDecrypt.Encrypt(lgn.Password))).FirstOrDefault();
+
+                if (userData == default(RegistrationUser))
                 {
                     res.status = "Invalid UserName/Password";
                 }
                 else
                 {
-                    res.Token = JWT_s.GenerateJSONWebToken(std, _config);
-                    res.status = "Login Successfuly";
-
+                    res.status = "Login Successfull";
+                    res.Token = JWT_s.GenerateJSONWebToken(userData, _config);
                 }
-              }
-              catch
-              {
-                  res.status = "Failed";
-              }
-              return res;
-          }
+            }
+            catch
+            {
+                res.status = "Failed";
+            }
+            return res;
+        }
 
-          
+
     }
    
 }
