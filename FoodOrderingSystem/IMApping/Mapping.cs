@@ -12,7 +12,7 @@ namespace FoodOrderingSystem.IMApping
     {
        public Mapping()
         {
-            CreateMap<InsertionModel, RegistrationUser>().ReverseMap();
+            CreateMap<UserRegistrationModel, RegistrationUser>().ReverseMap();
             CreateMap<GetModel, RegistrationUser>().ReverseMap();
             CreateMap<LoginModel, RegistrationUser>().ReverseMap();
         }

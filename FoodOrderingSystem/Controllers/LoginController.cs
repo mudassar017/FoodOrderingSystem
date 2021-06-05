@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
+using FoodOrderingSystem.EncryptionDecryptionClass;
 using FoodOrderingSystem.Management_Classes;
+using FoodOrderingSystem.Models;
 using FoodOrderingSystem.View_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
@@ -29,16 +32,15 @@ namespace FoodOrderingSystem.Controllers
         }
         [HttpPost]
         [Route("LoginStudent")]
-        public Response LoginStudent(LoginModel lgn)
+        public Response LoginStudent(RegistrationUser lgn)
         {
             Response res = new Response();
-            RegistrationUser std = _Project.Registrations.Where(std => lgn.Email.Equals(std.Email) && lgn.Password.Equals(std.Password)).FirstOrDefault();
             try
             {
-                
+                RegistrationUser std= _Project.Registrations.Where(std => std.Email.Equals(lgn.Email) && std.Password.Equals(lgn.Password)).FirstOrDefault();
                 if (std == default(RegistrationUser))
                 {
-                    res.status = "Invalid  UserName/Password";
+                    res.status = "Invalid UserName/Password";
                 }
                 else
                 {
@@ -46,14 +48,15 @@ namespace FoodOrderingSystem.Controllers
                     res.status = "Login Successfuly";
 
                 }
-            }
-            catch
-            {
-                res.status = "Failed";
-            }
-            return res;
-        }
+              }
+              catch
+              {
+                  res.status = "Failed";
+              }
+              return res;
+          }
 
-
+          
     }
+   
 }

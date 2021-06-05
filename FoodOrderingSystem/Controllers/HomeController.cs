@@ -22,13 +22,16 @@ namespace FoodOrderingSystem.Controllers
         {
             return View();
         }
-        
-
-        public IActionResult Privacy()
+        public IActionResult Login()
         {
             return View();
         }
-        public IActionResult Registration()
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
         {
             return View();
         }
