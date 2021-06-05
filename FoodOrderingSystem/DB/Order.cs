@@ -12,7 +12,11 @@ namespace FoodOrderingSystem.DB
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
-        public int RegistrationId { get; set; }
-
+        public int RegistratiodnId { get; set; }
+        public int NewOfferId { get; set; }
+        public int OrderPrice { get; set; }
+        public int OrderStatus { get; set; }
+        public DateTime OrderDateTime { get; set; }
+        
     }
 }

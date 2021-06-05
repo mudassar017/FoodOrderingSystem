@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.DB
 {
-    public class Food
+    public class NewOfferType
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int FoodId { get; set; }
-        public int MenuId { get; set; }
-        public string FoodName { get; set; }
-        public string FoodDescription { get; set; }
-        public int FoodPrice { get; set; }
-        public int RatingonFood { get; set; }
+        public int NewOfferTypeId { get; set; }
+        public string NewOfferTypeTitle { get; set; }
+        public int NewOfferTypeStatus { get; set; }
         public DateTime InsertionDateTime { get; set; }
     }
 }
