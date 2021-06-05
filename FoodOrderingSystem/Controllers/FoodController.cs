@@ -20,5 +20,25 @@ namespace FoodOrderingSystem.Controllers
         {
             return View();
         }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult Menu()
+        {
+            return View();
+        }
+        public IActionResult Reservation()
+        {
+            return View();
+        }
+        public IActionResult Gallery()
+        {
+            return View();
+        }
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }
