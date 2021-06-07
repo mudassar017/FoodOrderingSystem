@@ -12,9 +12,15 @@ namespace FoodOrderingSystem.IMApping
     {
        public Mapping()
         {
-            CreateMap<UserRegistrationModel, RegistrationUser>().ReverseMap();
-            CreateMap<GetModel, RegistrationUser>().ReverseMap();
-            CreateMap<LoginModel, RegistrationUser>().ReverseMap();
+            CreateMap<UserRegistrationModel, RegistrationUsers>().ReverseMap();
+            CreateMap<GetModel, RegistrationUsers>().ReverseMap();
+            CreateMap<LoginModel, RegistrationUsers>().ReverseMap();
+            CreateMap<UserNameCheckModal, RegistrationUsers>().ReverseMap();
+            CreateMap<EmailCheckModal, RegistrationUsers>().ReverseMap();
+            CreateMap<ChangePasswordModal, RegistrationUsers>().ReverseMap();
+            CreateMap<FoodModel, Foods>().ReverseMap();
+            CreateMap<MenuModel, Menus>().ReverseMap();
+            
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.DB
 {
-    public class NewOfferType
+    public class NewOfferTypes
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

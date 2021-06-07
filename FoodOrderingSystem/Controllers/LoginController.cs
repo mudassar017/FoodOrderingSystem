@@ -35,15 +35,12 @@ namespace FoodOrderingSystem.Controllers
           public Response LoginStudent(LoginModel lgn)
           {
               Response res = new Response();
-
-              
-
               try
               {
-                RegistrationUser userMatch = _map.Map<RegistrationUser>(lgn);
-                RegistrationUser userData = _Project.Registrations.Where(userData => userData.Email.Equals(lgn.Email) && userData.Password.Equals(EncryptDecrypt.Encrypt(lgn.Password))).FirstOrDefault();
+                RegistrationUsers userMatch = _map.Map<RegistrationUsers>(lgn);
+                RegistrationUsers userData = _Project.Registration.Where(userData => userData.Email.Equals(lgn.Email) && userData.Password.Equals(EncryptDecrypt.Encrypt(lgn.Password))).FirstOrDefault();
 
-                if (userData == default(RegistrationUser))
+                if (userData == default(RegistrationUsers))
                 {
                     res.status = "Invalid UserName/Password";
                 }
