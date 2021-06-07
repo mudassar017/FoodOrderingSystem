@@ -12,5 +12,37 @@ namespace FoodOrderingSystem.Context
         {
             return View();
         }
+
+        public IActionResult Analytics()
+        {
+            return View();
+        }
+
+        public IActionResult Review()
+        {
+            return View();
+        }
+
+        public IActionResult Order()
+        {
+            return View();
+        }
+
+        public IActionResult OrderList()
+        {
+            return View();
+        }
+
+        public IActionResult CustomerList()
+        {
+            return View();
+        }
+
+        public IActionResult EcomProductDetail()
+        {
+            return View();
+        }
+
+
     }
 }
