@@ -14,7 +14,13 @@ namespace FoodOrderingSystem.Context
 
         }
 
-        public DbSet<RegistrationUser> Registrations { get; set; }
+        public DbSet<RegistrationUsers> Registration { get; set; }
+        public DbSet<Foods> Food { get; set; }
+        public DbSet<Menus> Menu { get; set; }
+        public DbSet<NewOffers> NewOffer { get; set; }
+        public DbSet<NewOfferTypes> NewOfferType { get; set; }
+        public DbSet<OrderDetails> OrderDetail { get; set; }
+        public DbSet<Orders> Order { get; set; }
     }
 
 

@@ -31,6 +31,8 @@ namespace FoodOrderingSystem.Controllers
             _map = map;
 
         }
+
+        //APi TO Register New User
         [AllowAnonymous]
         [HttpPost]
 
@@ -41,12 +43,12 @@ namespace FoodOrderingSystem.Controllers
 
             try
             {
-                RegistrationUser newUser = _map.Map<RegistrationUser>(obj);
-
-
+                RegistrationUsers newUser = _map.Map<RegistrationUsers>(obj);
                 newUser.status = 1;
                 newUser.Password = EncryptDecrypt.Encrypt(newUser.Password);
-                _Project.Registrations.Add(newUser);
+                newUser.InsertedDateTime = DateTime.Now;
+                newUser.UserType = 0;
+                _Project.Registration.Add(newUser);
                 _Project.SaveChanges();
                 res.status = "Insertion successfull";
 
@@ -58,15 +60,89 @@ namespace FoodOrderingSystem.Controllers
             }
             return res;
         }
-
+        // Api To get User List
         [HttpGet]
         [Route("GetRegistration")]
         public async Task< List<GetModel>> GetRegistration()
         {
             await Task.Delay(0);  
-            List<RegistrationUser> RegistrationList = _Project.Registrations.Where(std => std.status == 1).ToList();
+            List<RegistrationUsers> RegistrationList = _Project.Registration.Where(usr => usr.status == 1).ToList();
             List<GetModel> NewList = _map.Map<List<GetModel>>(RegistrationList);
             return NewList;
+        }
+        // Api To Check UserEmail
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("CheckUserEmail")]
+        public async Task<Response> CheckUserEmail(EmailCheckModal email)
+        {
+            await Task.Delay(0);
+            Response res = new Response();
+            try
+            {
+                if(email.Email is null or "")
+                {
+                    res.status = "Please Enter Email";
+                }
+                else
+                {
+                    RegistrationUsers emailreg = new RegistrationUsers();
+                    emailreg = _map.Map<RegistrationUsers>(email);
+
+
+                    emailreg = _Project.Registration.Where(s => s.Email.Equals(email.Email)).FirstOrDefault();
+
+
+                    if(emailreg == default(RegistrationUsers))
+                    {
+                        res.status = "Available";
+                    }else
+                    {
+                        res.status = "Email Already Exist.";
+                    }
+                }
+                
+            }catch(Exception ex)
+            {
+                res.status = ex.Message;
+            }
+            return res;
+        }
+        //Api to Check UserName
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("CheckUserName")]
+        public async Task<Response> CheckUserName(UserNameCheckModal username)
+        {
+            await Task.Delay(0);
+            Response res = new Response();
+            try
+            {
+                if (username.UserName is null or "")
+                {
+                    res.status = "Please Enter UserName";
+                }
+                else
+                {
+                    RegistrationUsers checkUserName = new RegistrationUsers();
+                    checkUserName = _map.Map<RegistrationUsers>(username);
+                    checkUserName = _Project.Registration.Where(CheckUserName=> checkUserName.UserName.Equals(username.UserName)).FirstOrDefault();
+                    if (checkUserName == default(RegistrationUsers))
+                    {
+                        res.status = "Available";
+                    }
+                    else
+                    {
+                        res.status = "UserName Already Exist.";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                res.status = ex.Message;
+            }
+            return res;
         }
     }
 }

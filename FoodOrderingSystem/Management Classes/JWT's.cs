@@ -13,7 +13,7 @@ namespace FoodOrderingSystem.Management_Classes
 {
     public class JWT_s
     {
-        public static string GenerateJSONWebToken(RegistrationUser userInfo, IConfiguration config)
+        public static string GenerateJSONWebToken(RegistrationUsers userInfo, IConfiguration config)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -23,10 +23,10 @@ namespace FoodOrderingSystem.Management_Classes
 
             var claims = new[] {
              
-                 new Claim("Name", userInfo.Name.ToString()),
-                 new Claim("Email", userInfo.Email.ToString()),
-                 new Claim("PhoneNumber", userInfo.PhoneNumber.ToString()),
-                 new Claim("Address", userInfo.Address.ToString()),
+                
+                 new Claim("UserId", userInfo.RegistrationId.ToString()),
+                 new Claim("UserName", userInfo.UserName.ToString()),
+                 
             };
 
 

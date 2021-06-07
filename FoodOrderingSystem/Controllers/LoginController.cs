@@ -30,17 +30,20 @@ namespace FoodOrderingSystem.Controllers
             _map = map;
 
         }
-        [HttpPost]
-        [Route("LoginStudent")]
-        public Response LoginStudent(LoginModel lgn)
-        {
-            Response res = new Response();
-            try
-            {
+          [HttpPost]
+          [Route("LoginStudent")]
+          public Response LoginUser(LoginModel lgn)
+          {
+              Response res = new Response();
+
+              
+
+              try
+              {
                 RegistrationUser userMatch = _map.Map<RegistrationUser>(lgn);
                 RegistrationUser userData = _Project.Registrations.Where(userData => userData.Email.Equals(lgn.Email) && userData.Password.Equals(EncryptDecrypt.Encrypt(lgn.Password))).FirstOrDefault();
 
-                if (userData == default(RegistrationUser))
+                if (userData == default(RegistrationUsers))
                 {
                     res.status = "Invalid UserName/Password";
                 }
@@ -49,15 +52,15 @@ namespace FoodOrderingSystem.Controllers
                     res.status = "Login Successfull";
                     res.Token = JWT_s.GenerateJSONWebToken(userData, _config);
                 }
-            }
-            catch
-            {
-                res.status = "Failed";
-            }
-            return res;
-        }
+              }
+              catch
+              {
+                  res.status = "Failed";
+              }
+              return res;
+          }
 
-
+          
     }
    
 }
