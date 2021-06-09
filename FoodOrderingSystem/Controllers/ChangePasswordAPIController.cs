@@ -38,43 +38,34 @@ namespace FoodOrderingSystem.Controllers
         {
             await Task.Delay(0);
             Response res = new Response();
-            //var identity = User.Identity as ClaimsIdentity;
-            //if (identity != null)
-            //{
-            //    IEnumerable<Claim> claims = identity.Claims;
-            //    var name = claims.Where(p => p.Type == "UserId").FirstOrDefault()?.Value;var name = claims.Where(p => p.Type == "UserId").FirstOrDefault()?.Value;
-            //    res.status = name;
-            //}
             try
             {
-                if (password.OldPassword is null or "" || password.NewPassword is null or "")
+                if (password.Password is null or "" || password.NewPassword is null or "")
                 {
                     res.status = "Please Fill All Fields";
                 }
                 else
                 {
 
-
-
                     var currentUser = HttpContext.User;
                     if (currentUser.HasClaim(c => c.Type == "UserId"))
                     {
-                        //string UserId = currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value.ToString();
-                        //string UserName = currentUser.Claims.FirstOrDefault(c => c.Type == "UserName").Value.ToString();
-                        //var oldPassword = EncryptDecrypt.Encrypt(password.OldPassword);
-                        //RegistrationUsers newuser = _map.Map<RegistrationUsers>(UserId, oldPassword);
-                        //RegistrationUsers checkpassword = _Project.Registration.Where(checkpassword => checkpassword.RegistrationId.Equals(UserId)) && checkpassword.Password.Equals(oldPassword).FirstOrDefault();
-                        //if (checkpassword == default(RegistrationUsers))
-                        //{
-                        //    res.status = "Old Password Not Matched";
-                        //}
-                        //else
-                        //{
-                        //    checkpassword.Password = password.NewPassword;
-                        //    _Project.Registration.Add(checkpassword);
-                        //    _Project.SaveChanges();
-                        //    res.status = "Password Changed Successfully";
-                        //}
+                        string UserId = currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value.ToString();
+                        string UserName = currentUser.Claims.FirstOrDefault(c => c.Type == "UserName").Value.ToString();
+                        var oldPassword = EncryptDecrypt.Encrypt(password.Password);
+                        
+                        var checkpassword = _Project.Registration.Where(s=> s.UserName.Equals(UserName) && s.Password.Equals(oldPassword)).SingleOrDefault();
+                        if (checkpassword ==null)
+                        {
+                            res.status = "Old Password Not Matched";
+                        }
+                        else
+                        {
+                            checkpassword.Password = password.NewPassword;
+                            _Project.Registration.Update(checkpassword);
+                            _Project.SaveChanges();
+                            res.status = "Password Changed Successfully";
+                        }
                     }
                     else
                     {

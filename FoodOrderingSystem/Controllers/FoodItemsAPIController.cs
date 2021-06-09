@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration;
 using FoodOrderingSystem.Context;
 using FoodOrderingSystem.DB;
 using FoodOrderingSystem.Models;
@@ -7,6 +6,7 @@ using FoodOrderingSystem.View_Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.OLE.Interop;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class FoodItemsAPIController : ControllerBase
@@ -44,9 +44,7 @@ namespace FoodOrderingSystem.Controllers
                               join std in _Project.Menu on fod.MenuId equals std.MenuId
                               select new
                               {
-                                  MenuId = std.MenuId,
                                   MenuTitle = std.MenuTitle,
-                                  FoodId = fod.FoodId,
                                   FoodName = fod.FoodName,
                                   FoodDescription = fod.FoodDescription,
                                   FoodPrice = fod.FoodPrice,
@@ -63,7 +61,7 @@ namespace FoodOrderingSystem.Controllers
             
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("InsertMenuFood")]
         public async Task<Response> InsertMenuFood(FoodModel food)
         {
@@ -71,7 +69,7 @@ namespace FoodOrderingSystem.Controllers
             Response res = new Response();
             try
             {
-                if (food is null )
+                if (food.FoodName is null or "" )
                 {
 
                     res.status = "Please Fill All Required Fields.";
@@ -96,16 +94,16 @@ namespace FoodOrderingSystem.Controllers
         }
 
 
-        [AllowAnonymous]
+       
         [HttpGet]
         [Route("GetMenu")]
-        public async Task<List<MenuModel>> GetMenu()
+        public async Task<List<GetMenuModel>> GetMenu()
         {
             await Task.Delay(0);
             try
             {
                 List<Menus> MenuItems = _Project.Menu.Where(MenuItems => MenuItems.Status == 1).ToList();
-                List<MenuModel> Items = _map.Map<List<MenuModel>>(MenuItems);
+                List<GetMenuModel> Items = _map.Map<List<GetMenuModel>>(MenuItems);
                 return Items;
             }
             catch
@@ -124,7 +122,7 @@ namespace FoodOrderingSystem.Controllers
             Response res = new Response();
             try
             {
-                if (menu is null)
+                if (menu.MenuTitle is null or "")
                 {
 
                     res.status = "Please Fill All Required Fields.";

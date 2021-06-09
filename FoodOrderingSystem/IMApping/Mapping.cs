@@ -18,8 +18,10 @@ namespace FoodOrderingSystem.IMApping
             CreateMap<UserNameCheckModal, RegistrationUsers>().ReverseMap();
             CreateMap<EmailCheckModal, RegistrationUsers>().ReverseMap();
             CreateMap<ChangePasswordModal, RegistrationUsers>().ReverseMap();
+            CreateMap<GetProfile, RegistrationUsers>().ReverseMap();
             CreateMap<FoodModel, Foods>().ReverseMap();
             CreateMap<MenuModel, Menus>().ReverseMap();
+            CreateMap<GetMenuModel, Menus>().ReverseMap();
             
         }
     }
