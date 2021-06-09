@@ -7,7 +7,7 @@ namespace FoodOrderingSystem.View_Model
 {
     public class ChangePasswordModal
     {
-        public string OldPassword { get; set; }
+        public string Password { get; set; }
         public string NewPassword { get; set; }
     }
 }

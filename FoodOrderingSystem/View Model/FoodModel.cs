@@ -7,7 +7,7 @@ namespace FoodOrderingSystem.View_Model
 {
     public class FoodModel
     {
-        public int FoodId { get; set; }
+       
         public int MenuId { get; set; }
         public string FoodName { get; set; }
         public string FoodDescription { get; set; }

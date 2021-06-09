@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.View_Model
 {
-    public class MenuModel
+    public class GetMenuModel
     {
-        
+        public int MenuId { get; set; }
         public string MenuTitle { get; set; }
     }
 }
