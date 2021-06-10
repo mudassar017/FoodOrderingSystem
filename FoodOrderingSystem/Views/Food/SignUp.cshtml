@@ -157,6 +157,52 @@
         });
 
 
+        $('#txtName').blur(function () {
+            var UserName = $('#txtName').val();
+            var jsonObj = { "userName": UserName };
+            $.ajax({
+                type: "POST",
+                url: "/api/Registration/CheckUserName",
+                data: JSON.stringify(jsonObj),
+                contentType: "application/json;",
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "Available") {
+
+                        new Notify({
+                            title: 'UserName',
+                            text: "UserName Available",
+                            status: 'success',
+                            effect: 'slide',// animation
+                            speed: 300, // animation speed
+                            type: 3,
+                            autoclose: true,
+                            autotimeout: 2000
+                        });
+                    }
+                    else {
+                        new Notify({
+                            title: 'UserName',
+                            text: 'UserName Already Exist',
+                            status: 'warning',
+                            effect: 'slide',// animation
+                            speed: 300, // animation speed
+                            type: 3,
+                            autoclose: true,
+                            autotimeout: 2000
+                        });
+
+                        $('#txtName').focus();
+                    }
+
+                }
+            });
+
+        });
+
+       
+
+
 
         $('#submit-button').click(function () {
             var Name = $('#txtName').val();
@@ -201,9 +247,6 @@
 </script>
 
 
-
-<!-- Mirrored from demo.epic-webdesign.com/tf-fable/restaurant/reservations.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Jun 2021 12:54:45 GMT -->
-</html>
 
 
 

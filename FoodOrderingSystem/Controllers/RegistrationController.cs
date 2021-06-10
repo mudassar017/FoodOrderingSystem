@@ -126,7 +126,7 @@ namespace FoodOrderingSystem.Controllers
                 {
                     RegistrationUsers checkUserName = new RegistrationUsers();
                     checkUserName = _map.Map<RegistrationUsers>(username);
-                    checkUserName = _Project.Registration.Where(CheckUserName=> checkUserName.UserName.Equals(username.UserName)).FirstOrDefault();
+                    checkUserName = _Project.Registration.Where(checkUserName=> checkUserName.UserName.Equals(username.UserName)).FirstOrDefault();
                     if (checkUserName == default(RegistrationUsers))
                     {
                         res.status = "Available";
