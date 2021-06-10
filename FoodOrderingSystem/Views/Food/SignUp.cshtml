@@ -70,13 +70,15 @@
 
                     <input class="register-input white-input" required="" id="txtName" name="register_names" placeholder="Full Name" type="text">
 
+                    <input class="register-input white-input" required="" id="txtUserName" name="register_names" placeholder="Enter User Name" type="text">
+
                     <input class="register-input white-input" required="" id="txtNumber" name="register_phone" placeholder="Phone Number" type="text">
 
                     <input class="register-input white-input" required="" id="txtEmail" name="register_email" placeholder="Email" type="text">
 
                     <input class="register-input white-input" required="" id="txtPassword" name="register_Password" placeholder="Password" type="text">
 
-                    <input class="register-input white-input" required="" id="txtAddress" name="register_address" placeholder="Address" type="text"
+                    <input class="register-input white-input" required="" id="txtAddress" name="register_address" placeholder="Address" type="text" />
 
                            <!-- begin col-md-12-->
                     <div class="col-md-12">
@@ -101,7 +103,7 @@
 
         </div>
         <!--end container-->
-
+    </div>
 </section>
 <!--end section-white-->
 
@@ -157,8 +159,8 @@
         });
 
 
-        $('#txtName').blur(function () {
-            var UserName = $('#txtName').val();
+        $('#txtUserName').blur(function () {
+            var UserName = $('#txtUserName').val();
             var jsonObj = { "userName": UserName };
             $.ajax({
                 type: "POST",
@@ -192,7 +194,7 @@
                             autotimeout: 2000
                         });
 
-                        $('#txtName').focus();
+                        $('#txtUserName').focus();
                     }
 
                 }
@@ -206,12 +208,13 @@
 
         $('#submit-button').click(function () {
             var Name = $('#txtName').val();
+            var UserName = $('#txtUserName').val();
             var Number = $('#txtNumber').val();
             var Email = $('#txtEmail').val();
             var Password = $('#txtPassword').val();
             var Address = $('#txtAddress').val();
 
-            var MyJson = { "name": Name, "number": Number, "email": Email, "password": Password, "address": Address, };
+            var MyJson = { "name": Name, "userName": UserName, "number": Number, "email": Email, "password": Password, "address": Address, };
 
 
 
@@ -223,22 +226,39 @@
                 dataType: "json",
                 success: function (response) {
                     if (response.status == "Insertion successfull") {
-                        $('#txtName').val('');
-                        $('#txtNumber').val('');
-                        $('#txtEmail').val('');
-                        $('#txtPassword').val('');
-                        $('#txtAddress').val('');
-                        $('#txtName').focus();
-                        $('#lblMessage').html("Insertion successfull");
-                        $('#lblMessage').css('color', 'green');
+                        
+                            new Notify({
+                                title: 'SignUp',
+                                text: "SignUp Successfully",
+                                status: 'success',
+                                effect: 'slide',// animation
+                                speed: 300, // animation speed
+                                type: 3,
+                                autoclose: true,
+                                autotimeout: 2000,
+                            });
+                        window.location="/food/login";
+
+                        
+
                     }
                     else {
-                        $('#lblMessage').html("Insertion Failed");
-                        $('#lblMessage').css('color', 'red');
-                    }
+                        
+                            new Notify({
+                                title: 'SignUp',
+                                text: "SignUp Failed",
+                                status: 'success',
+                                effect: 'slide',// animation
+                                speed: 300, // animation speed
+                                type: 3,
+                                autoclose: true,
+                                autotimeout: 2000
+                            });
+                        $('#txtName').focus();
+                        
 
+                    };
                 }
-
             });
 
 
