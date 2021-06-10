@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/foodlayout.cshtml";
+}
+<html lang="en">
+
+
+<!-- Mirrored from demo.epic-webdesign.com/tf-fable/restaurant/reservations.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Jun 2021 12:54:39 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <title>Fable - Restaurant Site Template</title>
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Template CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style-magnific-popup.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/icons-main.css" rel="stylesheet">
+    <link href="css/icons-helper.css" rel="stylesheet">
+
+    <!-- RS5.0 Main Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="revolution/css/settings.css">
+
+    <!-- RS5.0 Layers and Navigation Styles -->
+    <link rel="stylesheet" type="text/css" href="revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="revolution/css/navigation.css">
+
+    <!-- Google Fonts -->
+    <link href='../../../fonts.googleapis.com/css87a1.css?family=Tangerine:400,700' rel='stylesheet' type='text/css'>
+    <link href='../../../fonts.googleapis.com/css7728.css?family=Lora:400,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='../../../fonts.googleapis.com/csse3e5.css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Font Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!--headerIncludes-->
+
+</head>
+<body>
+
+
+    <!--begin reservation-hero-section -->
+    <section id="hero-section" class="reservation-hero-section">
+
+        <!--begin image-overlay -->
+        <div class="image-overlay"></div>
+        <!--end image-overlay -->
+        <!--begin container-->
+        <div class="container image-section-inside">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col-md-10-->
+                <div class="col-md-10 col-md-offset-1 text-center">
+
+                    <span class="comic-text wow fadeIn" data-wow-delay="0.5s">SignUp</span>
+
+
+
+                    <p class="hero-text wow fadeInUp " data-wow-delay="2s"> <h2 class="section-title white wow bounceIn" data-wow-delay="1s">Be Our Part Its a Pleasure for us</h2></p>
+
+                </div>
+                <!--end col-md-10-->
+
+            </div>
+            <!--end row-->
+
+        </div>
+        <!--end container-->
+
+    </section>
+    <!--end reservation-hero-section -->
+    <!--begin section-white-->
+    <section class="section-white small-padding no-padding-bottom">
+
+        <!--begin container-->
+        <div class="container">
+
+            <!--begin row-->
+            <div class="row">
+
+                <!--begin col-md-6-->
+                <div class="col-md-6 wow bounceInUp">
+
+                    <img src="images/chef2.jpg" alt="picture" class="width-100">
+
+                </div>
+                <!--end col-md-6-->
+                <!--begin col-md-6-->
+                <div class="col-md-6 text-center register-inner padding-top-30">
+
+                    <span class="comic-text">SignUp</span>
+
+
+                    <!--begin success message -->
+                    <p class="register_success_box" style="display:none;">We received your message and you'll hear from us soon. Thank You!</p>
+                    <!--end success message -->
+                    <!--begin register form -->
+                    <form id="register-form" class="contact" action="https://demo.epic-webdesign.com/tf-fable/restaurant/php/register.php" method="post">
+
+                        <!--begin col-md-12-->
+                        <div class="col-md-12">
+
+                            <input class="register-input white-input" required="" id="txtName" name="register_names" placeholder="Full Name" type="text">
+
+                            <input class="register-input white-input" required="" id="txtNumber" name="register_phone" placeholder="Phone Number" type="text">
+
+                            <input class="register-input white-input" required="" id="txtEmail" name="register_email" placeholder="Email" type="text">
+
+                            <input class="register-input white-input" required="" id="txtPassword" name="register_Password" placeholder="Password" type="text">
+
+                            <input class="register-input white-input" required="" id="txtAddress" name="register_address" placeholder="Address" type="text"
+
+                           <!-- begin col-md-12-->
+                            <div class="col-md-12">
+                                <label id="lblMessage"></label>
+                            </div>
+                            <!--end col-md-12-->
+                            <!-- begin col-md-12-->
+
+                            <div class="col-md-12  ">
+
+                                <input value="SignUp" id="submit-button" class="register-submit" type="submit">
+
+                            </div>
+                            <!--end col-md-12-->
+
+</form>
+                    <!--end register form -->
+
+                </div>
+                <!--end col-md-6-->
+
+            </div>
+            <!--end row-->
+
+        </div>
+        <!--end container-->
+
+    </section>
+    <!--end section-white-->
+    <!-- Load JS here for greater good =============================-->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nav.js"></script>
+    <script src="js/jquery.scrollTo-min.js"></script>
+    <script src="js/SmoothScroll.js"></script>
+    <script src="js/wow.js"></script>
+
+    <!-- RS5.0 Core JS Files -->
+    <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
+
+    <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>
+    <script type="text/javascript" src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script type="text/javascript" src="revolution/js/extensions/revolution.extension.actions.min.js"></script>
+    <script type="text/javascript" src="revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script type="text/javascript" src="revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+
+    <!-- begin custom script-->
+    <script src="js/custom.js"></script>
+    <script src="js/plugins.js"></script>
+
+</body>
+<script>
+    $(document).ready(function () {
+        $('#submit-button').click(function () {
+            var Name = $('#txtName').val();
+            var Number = $('#txtNumber').val();
+            var Email = $('#txtEmail').val();
+            var Password = $('#txtPassword').val();
+            var Address = $('#txtAddress').val();
+
+            var MyJson = { "name": Name, "number": Number, "email": Email, "password": Password, "address": Address, };
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/Registration/RegistrationUser",
+                data: JSON.stringify(MyJson),
+                contentType: "application/json;",
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "Insertion successfull") {
+                        $('#txtName').val('');
+                        $('#txtNumber').val('');
+                        $('#txtEmail').val('');
+                        $('#txtPassword').val('');
+                        $('#txtAddress').val('');
+                        $('#txtName').focus();
+                        $('#lblMessage').html("Insertion successfull");
+                        $('#lblMessage').css('color', 'green');
+                    }
+                    else {
+                        $('#lblMessage').html("Insertion Failed");
+                        $('#lblMessage').css('color', 'red');
+                    }
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            });
+
+
+        });
+    });
+</script>
+
+
+
+<!-- Mirrored from demo.epic-webdesign.com/tf-fable/restaurant/reservations.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Jun 2021 12:54:45 GMT -->
+</html>
+
+
+

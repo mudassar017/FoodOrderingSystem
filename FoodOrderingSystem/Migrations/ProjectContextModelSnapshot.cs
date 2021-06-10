@@ -19,7 +19,163 @@ namespace FoodOrderingSystem.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FoodOrderingSystem.DB.RegistrationUser", b =>
+            modelBuilder.Entity("FoodOrderingSystem.DB.Foods", b =>
+                {
+                    b.Property<int>("FoodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FoodDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FoodPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InsertionDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MenuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingonFood")
+                        .HasColumnType("int");
+
+                    b.HasKey("FoodId");
+
+                    b.ToTable("Food");
+                });
+
+            modelBuilder.Entity("FoodOrderingSystem.DB.Menus", b =>
+                {
+                    b.Property<int>("MenuId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("InsertionDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MenuTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("MenuId");
+
+                    b.ToTable("Menu");
+                });
+
+            modelBuilder.Entity("FoodOrderingSystem.DB.NewOfferTypes", b =>
+                {
+                    b.Property<int>("NewOfferTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("InsertionDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NewOfferTypeStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NewOfferTypeTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewOfferTypeId");
+
+                    b.ToTable("NewOfferType");
+                });
+
+            modelBuilder.Entity("FoodOrderingSystem.DB.NewOffers", b =>
+                {
+                    b.Property<int>("NewOfferId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("InsertionDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NewOfferDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NewOfferPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NewOfferStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NewOfferTite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NewOfferTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NewOfferId");
+
+                    b.ToTable("NewOffer");
+                });
+
+            modelBuilder.Entity("FoodOrderingSystem.DB.OrderDetails", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantityOfFood")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.ToTable("OrderDetail");
+                });
+
+            modelBuilder.Entity("FoodOrderingSystem.DB.Orders", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("NewOfferId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("OrderDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RegistratiodnId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("FoodOrderingSystem.DB.RegistrationUsers", b =>
                 {
                     b.Property<int>("RegistrationId")
                         .ValueGeneratedOnAdd()
@@ -44,12 +200,18 @@ namespace FoodOrderingSystem.Migrations
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
+
                     b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("RegistrationId");
 
-                    b.ToTable("Registrations");
+                    b.ToTable("Registration");
                 });
 #pragma warning restore 612, 618
         }
