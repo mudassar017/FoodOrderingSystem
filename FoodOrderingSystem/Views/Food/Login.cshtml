@@ -7,6 +7,9 @@
 <script src="~/toastr/toastr.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <!--begin reservation-hero-section -->
 <section id="hero-section" class="reservation-hero-section">
 
@@ -40,9 +43,7 @@
 <!--end reservation-hero-section -->
 <!--begin section-white-->
 <section class="section-white small-padding no-padding-bottom">
-    <script src="~/lib/bootstrap/dist/css/bootstrap.min.css"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <!--begin container-->
     <div class="container">
 
@@ -143,8 +144,10 @@
                             autotimeout: 2000
                         });
                     }
+                },
+                error: function (errormsg) {
+                    prompt("", JSON.stringify(errormsg));
                 }
-
             });
         });
     });
