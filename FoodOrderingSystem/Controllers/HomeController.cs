@@ -35,12 +35,7 @@ namespace FoodOrderingSystem.Controllers
         {
             return View();
         }
-        // Admin Pannel Action
-        public IActionResult AdminPannel()
-        {
-            return View();
-        }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -42,7 +42,5 @@ namespace FoodOrderingSystem.Context
         {
             return View();
         }
-
-
     }
 }
