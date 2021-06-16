@@ -41,6 +41,23 @@ namespace FoodOrderingSystem.Controllers
             return View();
         }
 
+        public IActionResult BreakFast()
+        {
+            return View();
+        }
+        public IActionResult Lunch2()
+        {
+            return View();
+        }
+        public IActionResult Dinner()
+        {
+            return View();
+        }
+        public IActionResult Special()
+        {
+            return View();
+        }
+
         public IActionResult ChangePassword()
         {
             return View();

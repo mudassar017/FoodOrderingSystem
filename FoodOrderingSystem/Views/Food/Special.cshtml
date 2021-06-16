@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Special";
+    Layout = "~/Views/Shared/foodlayout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<section id="hero-section" class="menu-hero-section">
+
+    <!--begin image-overlay -->
+    <div class="image-overlay"></div>
+    <!--end image-overlay -->
+    <!--begin container-->
+    <div class="container image-section-inside">
+
+        <!--begin row-->
+        <div class="row">
+
+            <!--begin col-md-10-->
+            <div class="col-md-10 col-md-offset-1 text-center">
+
+                <span class="comic-text white wow fadeIn" data-wow-delay="0.5s">Main Menu</span>
+
+                <h2 class="section-title white wow bounceIn" data-wow-delay="1s">Food &amp; Drinks</h2>
+
+                <p class="hero-text wow fadeInUp" data-wow-delay="2s">
+                    An unforgettable dining experience in the heart of Covent Garden, London.<br>
+                    Contemporary british menu, inspired by the traditions of Great Britain.
+                </p>
+
+            </div>
+            <!--end col-md-10-->
+
+        </div>
+        <!--end row-->
+
+    </div>
+    <!--end container-->
+
+</section>
+<section class="section-white">
+
+    <!--begin container-->
+    <div class="container">
+
+        <!--begin row-->
+        <div class="row">
+
+
+            <!--begin col-md-6-->
+            <div class="col-md-12" id="ListOfFood4">
+
+                <h2 class="menu-section-title" id="Special">Special</h2>
+
+
+
+            </div>
+            <!--end col-md-6-->
+
+        </div>
+        <!--end container-->
+
+</section>
+
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "/api/FoodItemsAPI/GetMenuFood",
+            contentType: "application/json;",
+            success: function (response) {
+                $.each(response, function (index, value) {
+                    if (value.menuTitle == "Special") {
+
+                        $('#ListOfFood4').append('<div class="menu-wrapper"> <div class="menu-image"> <a href="#"><img src="/food/images/m3.jpg" class="width-100" alt="food"></a> </div><div class="menu-description"> <div class="menu-list"> <h5 id="foodTitle">' + value.foodName + '</h5> <p class="price">$<span id="foodPrice">' + value.foodPrice + '</span></p><span class="menu-dot-line"></span> </div><p class="menu-ingredients" id="foodDescription">' + value.foodDescription + '</p></div></div>');
+                    }
+                });
+            }
+        });
+    });
+</script>
