@@ -45,6 +45,7 @@ namespace FoodOrderingSystem.Controllers
                               {
                                   MenuId = std.MenuId,
                                   MenuTitle = std.MenuTitle,
+                                  FoodId = fod.FoodId,
                                   FoodName = fod.FoodName,
                                   FoodDescription = fod.FoodDescription,
                                   FoodPrice = fod.FoodPrice,

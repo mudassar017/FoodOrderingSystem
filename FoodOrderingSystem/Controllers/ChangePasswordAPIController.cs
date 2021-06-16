@@ -61,7 +61,7 @@ namespace FoodOrderingSystem.Controllers
                         }
                         else
                         {
-                            checkpassword.Password = password.NewPassword;
+                            checkpassword.Password = EncryptDecrypt.Encrypt(password.NewPassword);
                             _Project.Registration.Update(checkpassword);
                             _Project.SaveChanges();
                             res.status = "Password Changed Successfully";
