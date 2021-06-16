@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FoodOrderingSystem.Context;
-using FoodOrderingSystem.DB;
 using FoodOrderingSystem.EncryptionDecryptionClass;
 using FoodOrderingSystem.Models;
 using FoodOrderingSystem.View_Model;
@@ -11,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace FoodOrderingSystem.Controllers
@@ -19,12 +17,12 @@ namespace FoodOrderingSystem.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ChangePasswordAPIController : ControllerBase
+    public class UserProfileUpdateController : ControllerBase
     {
         IConfiguration _config;
         ProjectContext _Project;
         IMapper _map;
-        public ChangePasswordAPIController(IConfiguration config, ProjectContext project, IMapper map)
+        public UserProfileUpdateController(IConfiguration config, ProjectContext project, IMapper map)
         {
             _config = config;
             _Project = project;
@@ -33,14 +31,15 @@ namespace FoodOrderingSystem.Controllers
         }
         //Api To Change User Password
         [HttpPost]
-        [Route("ChangePassword")]
-        public async Task<Response> ChangeUserPassword(ChangePasswordModal password)
+        [Route("UpdateUserProfile")]
+        public async Task<Response> UpdateUserProfile(UpdateProfileModel update )
         {
             await Task.Delay(0);
             Response res = new Response();
             try
             {
-                if (password.Password is null or "" || password.NewPassword is null or "")
+
+                if (update.Name is null or "" || update.Address is null or "")
                 {
                     res.status = "Please Fill All Fields";
                 }
@@ -52,20 +51,16 @@ namespace FoodOrderingSystem.Controllers
                     {
                         string UserId = currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value.ToString();
                         string UserName = currentUser.Claims.FirstOrDefault(c => c.Type == "UserName").Value.ToString();
-                        var oldPassword = EncryptDecrypt.Encrypt(password.Password);
                         
-                        var checkpassword = _Project.Registration.Where(s=> s.UserName.Equals(UserName) && s.Password.Equals(oldPassword)).SingleOrDefault();
-                        if (checkpassword ==null)
-                        {
-                            res.status = "Old Password Not Matched";
-                        }
-                        else
-                        {
-                            checkpassword.Password = EncryptDecrypt.Encrypt(password.NewPassword);
-                            _Project.Registration.Update(checkpassword);
+
+                        var updateProfile = _Project.Registration.Where(s => s.UserName.Equals(UserName)).SingleOrDefault();
+
+                        updateProfile.Name = update.Name;
+                        updateProfile.Address = update.Address;
+                            _Project.Registration.Update(updateProfile);
                             _Project.SaveChanges();
-                            res.status = "Password Changed Successfully";
-                        }
+                            res.status = "ProfileUpdated Successfully";
+                        
                     }
                     else
                     {
@@ -74,6 +69,9 @@ namespace FoodOrderingSystem.Controllers
 
 
                 }
+
+
+
             }
             catch (Exception ex)
             {
