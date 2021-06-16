@@ -43,6 +43,7 @@ namespace FoodOrderingSystem.Controllers
                               join std in _Project.Menu on fod.MenuId equals std.MenuId
                               select new
                               {
+                                  MenuId = std.MenuId,
                                   MenuTitle = std.MenuTitle,
                                   FoodName = fod.FoodName,
                                   FoodDescription = fod.FoodDescription,
