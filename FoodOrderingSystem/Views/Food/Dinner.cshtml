@@ -63,6 +63,11 @@
 
 <script>
     $(document).ready(function () {
+      
+        $(document).on('click', '.getFood', function () {
+            var foodName = $(this).attr("id");
+            alert(foodName);
+        });
 
         $.ajax({
             type: "GET",
@@ -72,7 +77,7 @@
                 $.each(response, function (index, value) {
                     if (value.menuTitle == "Dinner") {
 
-                        $('#ListOfFood3').append('<div class="menu-wrapper"> <div class="menu-image"> <a href="#"><img src="/food/images/m3.jpg" class="width-100" alt="food"></a> </div><div class="menu-description"> <div class="menu-list"> <h5 id="foodTitle">' + value.foodName + '</h5> <p class="price">$<span id="foodPrice">' + value.foodPrice + '</span></p><span class="menu-dot-line"></span> </div><p class="menu-ingredients" id="foodDescription">' + value.foodDescription + '</p></div></div>');
+                        $('#ListOfFood3').append('<div class="menu-wrapper getFood" id="' + value.foodName+'"> <div class="menu-image"> <a href="#"><img src="/food/images/m3.jpg" class="width-100" alt="food"></a> </div><div class="menu-description"> <div class="menu-list"> <h5 id="foodTitle">' + value.foodName + '</h5> <p class="price">$<span id="foodPrice">' + value.foodPrice + '</span></p><span class="menu-dot-line"></span> </div><p class="menu-ingredients" id="foodDescription">' + value.foodDescription + '</p></div></div>');
                     }
                 });
             }
