@@ -172,6 +172,12 @@ span.comic-text{
 	color:#F2B410;
 	font-family: 'Tangerine', cursive;
 }
+span.comic-text-ch {
+	font-size: 40px;
+	line-height: 60px;
+	color: #F2B410;
+	font-family: 'Tangerine', cursive;
+}
 
 p.section-subtitle{
 	font-size:16px!important;
@@ -275,10 +281,13 @@ iframe{
 .section-grey.no-padding-bottom, .section-white.no-padding-bottom, .section-dark.no-padding-bottom, .section-blue.no-padding-bottom{
 	padding:90px 0 0 0;
 }
-
-.section-grey.small-padding-bottom, .section-white.small-padding-bottom, .section-dark.small-padding-bottom, .section-blue.small-padding-bottom{
-	padding:90px 0 60px 0;
+.section-white.no-padding-bottomd {
+	padding: 5px 0 0 0;
 }
+
+	.section-grey.small-padding-bottom, .section-white.small-padding-bottom, .section-dark.small-padding-bottom, .section-blue.small-padding-bottom {
+		padding: 90px 0 60px 0;
+	}
 
 .section-grey.no-padding, .section-white.no-padding, .section-dark.no-padding, .section-blue.no-padding{
 	padding:0;

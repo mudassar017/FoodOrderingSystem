@@ -31,7 +31,7 @@ namespace FoodOrderingSystem.Controllers
 
         }
           [HttpPost]
-          [Route("LoginStudent")]
+          [Route("LoginUser")]
           public Response LoginUser(LoginModel lgn)
           {
               Response res = new Response();
