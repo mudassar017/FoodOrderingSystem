@@ -13,6 +13,6 @@ namespace FoodOrderingSystem.View_Model
         public int PhoneNumber { get; set; }
         public string Address { get; set; }
        
-        public int status { get; set; }
+        public int Status { get; set; }
     }
 }
